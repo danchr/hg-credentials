@@ -1,0 +1,11 @@
+syntax: rootglob
+
+.eggs
+build
+*.egg-info
+dist
+
+syntax: glob
+
+__pycache__
+*.pyc
