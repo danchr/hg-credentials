@@ -1,3 +1,10 @@
+# keychain.py — store Mercurial passwords in the macOS keychain
+#
+# Copyright © 2021, Dan Villiom Podlaski Christiansen
+#
+# This software may be used and distributed according to the terms of
+# the GNU General Public License version 2 or any later version.
+#
 """store passwords in the macOS keychain
 
 This extension offers no commands and no configuration. Once enabled,
