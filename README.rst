@@ -1,10 +1,11 @@
-==================
-Keychain Extension
-==================
+=====================
+Credentials Extension
+=====================
 
-This is an extension for Mercurial 5.7 or later, allowing you to save
-passwords in the macOS Keychain. The extension itself does not offer
-any commands: You simply enable it, and get an extra prompt::
+This is an extension for Mercurial 5.7 or later, allowing you to store
+HTTP passwords securely in the macOS Keychain. The extension itself
+does not offer any commands: You simply enable it, and get an extra
+prompt::
 
   $ hg pull
   pulling from https://example.com/private/repo
@@ -30,8 +31,9 @@ Requirements
 
 * Python 3.6 or later.
 * Mercurial 5.7 or later.
-* `PyObjC <https://pyobjc.readthedocs.io/>`_.
+* `PyObjC <https://pyobjc.readthedocs.io/>`_ on macOS.
 
+Windows is not supported.
 
 Installation and usage
 ----------------------
@@ -43,7 +45,7 @@ Install the extension and its dependencies with Pip::
 Then, add the following lines to your ``~/.hgrc``::
 
   [extensions]
-  keychain =
+  credentials =
 
 To avoid entering passwords for each and every repository, use
 ``auth.schemes``::
