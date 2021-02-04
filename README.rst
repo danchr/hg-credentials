@@ -2,7 +2,7 @@
 Credentials Extension
 =====================
 
-This is an extension for Mercurial 5.7 or later, allowing you to store
+This is an extension for Mercurial 5.6 or later, allowing you to store
 HTTP passwords securely in the macOS Keychain. The extension itself
 does not offer any commands: You simply enable it, and get an extra
 prompt::
@@ -31,7 +31,7 @@ Requirements
 ------------
 
 * Python 3.6 or later.
-* Mercurial 5.7 or later.
+* Mercurial 5.6 or later.
 * `PyObjC <https://pyobjc.readthedocs.io/>`_ on macOS.
 * `SecretStorage <https://secretstorage.readthedocs.io/>`_ elsewhere.
 
