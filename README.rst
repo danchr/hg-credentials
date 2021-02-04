@@ -17,14 +17,15 @@ prompt::
   searching for changes
   no changes found
 
-That would result an a new Keychain item named::
+That would result an a new item named in your key chain or key ring::
 
   Mercurial (me@example.com)
 
 Once a password is saved, there's nothing more to do. You'll get a new
 prompt, should the password suddenly stop working. To manage or delete
 your passwords, use the *Keychain Services* application included with
-macOS.
+macOS, GNOME Keyring or something similar included in your desktop
+environment.
 
 Requirements
 ------------
@@ -32,6 +33,7 @@ Requirements
 * Python 3.6 or later.
 * Mercurial 5.7 or later.
 * `PyObjC <https://pyobjc.readthedocs.io/>`_ on macOS.
+* `SecretStorage <https://secretstorage.readthedocs.io/>`_ elsewhere.
 
 Windows is not supported.
 
@@ -60,7 +62,6 @@ to the same Keychain item. See ``hg help config.auth`` for details.
 Future plans
 ------------
 
-* Add support for Gnome Keychain.
 * Add support for Git credential helpers.
 * Consider whether it makes sense to implement a completely custom
   ``urllib2`` password manager, so passwords aren't stored in memory

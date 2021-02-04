@@ -62,6 +62,14 @@ def get_backends(ui):
         except ImportError:
             ui.traceback()
 
+    if os.name == "posix":
+        try:
+            from . import secretstorage as backend
+
+            yield b"Secret Service", backend
+        except ImportError:
+            ui.traceback()
+
 
 def get_auth_url(ui, uris, user=None, realm=None):
     if isinstance(uris, tuple):
@@ -115,7 +123,7 @@ def add_password(orig, self, realm, uris, user, passwd):
     urlobj.user = user
     urlobj.passwd = passwd
 
-    for name, backend in get_backends():
+    for name, backend in get_backends(self.ui):
         try:
             backend.save_password(self.ui, urlobj)
         except ImportError:
