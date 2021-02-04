@@ -59,6 +59,15 @@ To avoid entering passwords for each and every repository, use
 This will cause all repositories on ``https://example.com`` to resolve
 to the same Keychain item. See ``hg help config.auth`` for details.
 
+Alternatives
+------------
+
+The most obvious alternative to this extension is the `Mercurial
+Keyring <https://pypi.org/project/mercurial_keyring/>`_ extension. It
+supports older versions of Mercurial and more backends, but doesn't
+handle invalid passwords gracefully, and saves passwords in a less
+readable fashion.
+
 Future plans
 ------------
 
