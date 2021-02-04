@@ -54,3 +54,12 @@ To avoid entering passwords for each and every repository, use
 
 This will cause all repositories on ``https://example.com`` to resolve
 to the same Keychain item. See ``hg help config.auth`` for details.
+
+Future plans
+------------
+
+* Add support for Gnome Keychain.
+* Add support for Git credential helpers.
+* Consider whether it makes sense to implement a completely custom
+  ``urllib2`` password manager, so passwords aren't stored in memory
+  any longer than strictly necessary.
