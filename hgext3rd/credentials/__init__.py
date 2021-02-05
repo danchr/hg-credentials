@@ -28,6 +28,7 @@ the same storage item. See :hg:`help config.auth` for details.
 
 """
 
+import contextlib
 import os
 import sys
 
@@ -69,6 +70,19 @@ def get_backends(ui):
             yield b"Secret Service", backend
         except ImportError:
             ui.traceback()
+
+
+@contextlib.contextmanager
+def backend_handler(ui, name):
+    try:
+        yield
+    except (ImportError, AttributeError):
+        if ui.debugflag:
+            ui.traceback()
+            ui.debug(b"credentials backend %s not available\n" % name)
+    except Exception as e:
+        ui.traceback()
+        ui.warn(b"warning: failed to save password to the %s\n" % name)
 
 
 def get_auth_url(ui, uris, user=None, realm=None):
@@ -124,17 +138,8 @@ def add_password(orig, self, realm, uris, user, passwd):
     urlobj.passwd = passwd
 
     for name, backend in get_backends(self.ui):
-        try:
+        with backend_handler(self.ui, name):
             backend.save_password(self.ui, urlobj)
-        except (ImportError, AttributeError):
-            if self.ui.debugflag:
-                self.ui.traceback()
-            self.ui.debug(b"failed importing credentials backend %s\n" % name)
-        except Exception as e:
-            self.ui.traceback()
-            self.ui.warn(
-                b"warning: failed to save password to the %s\n" % name
-            )
 
 
 def find_user_password(orig, self, realm, uri):
@@ -151,21 +156,11 @@ def find_user_password(orig, self, realm, uri):
         urlobj = get_auth_url(self.ui, uri, realm=realm)
 
         for name, backend in get_backends(self.ui):
-            try:
+            with backend_handler(self.ui, name):
                 user, passwd = backend.find_password(self.ui, urlobj)
 
                 if passwd is not None:
                     return user, passwd
-
-            except (ImportError, AttributeError):
-                if self.ui.debugflag:
-                    self.ui.traceback()
-                self.ui.debug(
-                    b"failed importing credentials backend %s\n" % name
-                )
-            except Exception as e:
-                self.ui.traceback()
-                self.ui.warn(b"warning: failed to query the %s\n" % name)
 
     # trigger a prompt
     user, passwd = orig(self, realm, uri)
