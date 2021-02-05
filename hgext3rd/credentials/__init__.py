@@ -140,6 +140,7 @@ def add_password(orig, self, realm, uris, user, passwd):
     for name, backend in get_backends(self.ui):
         with backend_handler(self.ui, name):
             backend.save_password(self.ui, urlobj)
+            break
 
 
 def find_user_password(orig, self, realm, uri):
