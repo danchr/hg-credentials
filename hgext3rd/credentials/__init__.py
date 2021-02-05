@@ -126,7 +126,9 @@ def add_password(orig, self, realm, uris, user, passwd):
     for name, backend in get_backends(self.ui):
         try:
             backend.save_password(self.ui, urlobj)
-        except ImportError:
+        except (ImportError, AttributeError):
+            if self.ui.debugflag:
+                self.ui.traceback()
             self.ui.debug(b"failed importing credentials backend %s\n" % name)
         except Exception as e:
             self.ui.traceback()
@@ -155,7 +157,9 @@ def find_user_password(orig, self, realm, uri):
                 if passwd is not None:
                     return user, passwd
 
-            except ImportError:
+            except (ImportError, AttributeError):
+                if self.ui.debugflag:
+                    self.ui.traceback()
                 self.ui.debug(
                     b"failed importing credentials backend %s\n" % name
                 )
