@@ -36,12 +36,16 @@ from mercurial import demandimport
 from mercurial import extensions
 from mercurial import httpconnection
 from mercurial import pycompat
+from mercurial import registrar
 from mercurial import url
 from mercurial import util
 
 testedwith = b"5.6 5.7"
 minimumhgversion = b"5.6"
 buglink = b"https://foss.heptapod.net/mercurial/hg-credentials/issues"
+
+cmdtable = {}
+command = registrar.command(cmdtable)
 
 # pyobjc uses lazy modules internally, so suppress demandimport for
 # them, but don't import them yet, as that's relatively slow --
@@ -171,6 +175,26 @@ def find_user_password(orig, self, realm, uri):
     add_password(None, self, realm, uri, user, passwd)
 
     return user, passwd
+
+
+@command(
+    b'debugcredentialbackends',
+    (),
+    optionalrepo=True,
+    intents={b'readonly'},
+)
+def debugcredentialbackends(ui, repo):
+    """check status of available backends
+    """
+
+    for name, backend in get_backends(ui):
+        try:
+            backend.find_password
+            backend.save_password
+            ui.write(b'ok: %s\n' % name)
+        except (ImportError, AttributeError) as e:
+            ui.traceback()
+            ui.write(b'not ok: %s\n' % name)
 
 
 def uisetup(ui):
