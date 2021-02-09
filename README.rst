@@ -3,9 +3,8 @@ Credentials Extension
 =====================
 
 This is an extension for Mercurial 5.6 or later, allowing you to store
-HTTP passwords securely in the macOS Keychain. The extension itself
-does not offer any commands: You simply enable it, and get an extra
-prompt::
+HTTP passwords securely. The extension itself does not offer any
+commands, you simply enable it, and get an extra prompt::
 
   $ hg pull
   pulling from https://example.com/private/repo
@@ -64,9 +63,8 @@ Alternatives
 
 The most obvious alternative to this extension is the `Mercurial
 Keyring <https://pypi.org/project/mercurial_keyring/>`_ extension. It
-supports older versions of Mercurial and more backends, but doesn't
-handle invalid passwords gracefully, and saves passwords in a less
-readable fashion.
+supports older versions of Mercurial and more backends, but saves
+passwords in a less readable fashion.
 
 Future plans
 ------------
@@ -75,3 +73,9 @@ Future plans
 * Consider whether it makes sense to implement a completely custom
   ``urllib2`` password manager, so passwords aren't stored in memory
   any longer than strictly necessary.
+
+Acknowledgements
+----------------
+
+Thanks you to Octobus and Heptapod for hosting this project, and for
+making Mercurial development fun again!
