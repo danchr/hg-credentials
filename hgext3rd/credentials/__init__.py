@@ -86,7 +86,7 @@ def backend_handler(ui, name):
             ui.debug(b"credentials backend %s not available\n" % name)
     except Exception as e:
         ui.traceback()
-        ui.warn(b"warning: failed to save password to the %s\n" % name)
+        ui.warn(b"warning: failed to access credentials in the %s\n" % name)
 
 
 def get_auth_url(ui, uris, user=None, realm=None):
