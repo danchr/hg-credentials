@@ -31,8 +31,8 @@ Requirements
 
 * Python 3.6 or later.
 * Mercurial 5.6 or later.
-* `PyObjC <https://pyobjc.readthedocs.io/>`_ on macOS.
-* `SecretStorage <https://secretstorage.readthedocs.io/>`_ elsewhere.
+* `SecretStorage <https://secretstorage.readthedocs.io/>`_ on
+  platforms other than macOS.
 
 Windows is not supported, yet.
 

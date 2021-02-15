@@ -5,6 +5,8 @@ build
 *.egg-info
 dist
 
+hgext3rd/credentials/keychain.abi3.so
+
 syntax: glob
 
 __pycache__
