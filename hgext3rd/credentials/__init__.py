@@ -47,6 +47,9 @@ buglink = b"https://foss.heptapod.net/mercurial/hg-credentials/issues"
 cmdtable = {}
 command = registrar.command(cmdtable)
 
+configtable = {}
+configitem = registrar.configitem(configtable)
+
 # pyobjc uses lazy modules internally, so suppress demandimport for
 # them, but don't import them yet, as that's relatively slow --
 # fortunately for us, accessing a repository over the network is even
@@ -56,6 +59,12 @@ demandimport.IGNORES |= {
     "Foundation",
     "Security",
 }
+
+configitem(
+    b"credentials",
+    b"helper",
+    default=None,
+)
 
 
 def get_backends(ui):
@@ -74,6 +83,11 @@ def get_backends(ui):
             yield b"Secret Service", backend
         except ImportError:
             ui.traceback()
+
+    # the simple fallback
+    from . import helper as backend
+
+    yield b"Helper", backend
 
 
 @contextlib.contextmanager
