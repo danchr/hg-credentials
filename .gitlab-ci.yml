@@ -1,0 +1,16 @@
+Tests:
+  image: registry.heptapod.net:443/mercurial/hg-git/ci:py$PYTHON-hg-$HG
+  script: |
+    exec python$PY tests/run-tests.py \
+      --verbose --color=always --with-hg=/usr/local/bin/hg \
+      --xunit $PWD/tests-$PY-$HG.xml
+  parallel:
+    matrix:
+      - PYTHON:
+          - "3.9"
+        HG:
+          - "5.6"
+          - "5.7"
+  artifacts:
+    reports:
+      junit: tests-$PYTHON-$HG.xml
