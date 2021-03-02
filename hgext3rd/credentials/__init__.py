@@ -178,23 +178,22 @@ def find_user_password(orig, self, realm, uri):
 
 
 @command(
-    b'debugcredentialbackends',
+    b"debugcredentialbackends",
     (),
     optionalrepo=True,
-    intents={b'readonly'},
+    intents={b"readonly"},
 )
 def debugcredentialbackends(ui, repo):
-    """check status of available backends
-    """
+    """check status of available backends"""
 
     for name, backend in get_backends(ui):
         try:
             backend.find_password
             backend.save_password
-            ui.write(b'ok: %s\n' % name)
+            ui.write(b"ok: %s\n" % name)
         except (ImportError, AttributeError) as e:
             ui.traceback()
-            ui.write(b'not ok: %s\n' % name)
+            ui.write(b"not ok: %s\n" % name)
 
 
 def uisetup(ui):
