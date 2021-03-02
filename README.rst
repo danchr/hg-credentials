@@ -34,7 +34,7 @@ Requirements
 * `PyObjC <https://pyobjc.readthedocs.io/>`_ on macOS.
 * `SecretStorage <https://secretstorage.readthedocs.io/>`_ elsewhere.
 
-Windows is not supported.
+Windows is not supported, yet.
 
 Installation and usage
 ----------------------
