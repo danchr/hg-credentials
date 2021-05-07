@@ -40,9 +40,11 @@ from mercurial import registrar
 from mercurial import url
 from mercurial import util
 
-testedwith = b"5.6 5.7"
+testedwith = b"5.6 5.7 5.8"
 minimumhgversion = b"5.6"
 buglink = b"https://foss.heptapod.net/mercurial/hg-credentials/issues"
+
+__version__ = '0.1'
 
 cmdtable = {}
 command = registrar.command(cmdtable)
@@ -100,7 +102,7 @@ def backend_handler(ui, name):
             ui.debug(b"credentials backend %s not available\n" % name)
     except Exception as e:
         ui.traceback()
-        ui.warn(b"warning: failed to access credentials in the %s\n" % name)
+        ui.warn(b"warning: failed to access credentials using the %s\n" % name)
 
 
 def get_auth_url(ui, uris, user=None, realm=None):

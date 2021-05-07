@@ -69,7 +69,6 @@ passwords in a less readable fashion.
 Future plans
 ------------
 
-* Add support for Git credential helpers.
 * Consider whether it makes sense to implement a completely custom
   ``urllib2`` password manager, so passwords aren't stored in memory
   any longer than strictly necessary.
