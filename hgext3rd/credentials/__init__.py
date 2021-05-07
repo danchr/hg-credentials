@@ -50,7 +50,7 @@ testedwith = b"5.6 5.7 5.8"
 minimumhgversion = b"5.6"
 buglink = b"https://foss.heptapod.net/mercurial/hg-credentials/issues"
 
-__version__ = '0.1'
+__version__ = '0.1.1'
 
 cmdtable = {}
 command = registrar.command(cmdtable)
