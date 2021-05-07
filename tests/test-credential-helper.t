@@ -44,7 +44,7 @@ Allow password prompts without a TTY:
   user: user
   password: password
   would you like to save this password? (Y/n)  y
-  warning: failed to access credentials in the Helper
+  warning: failed to access credentials using the Helper
   abort: HTTP Error 403: no
 
   $ cat >> $HGRCPATH <<EOF
