@@ -11,6 +11,7 @@ Tests:
         HG:
           - "5.6"
           - "5.7"
+          - "5.8"
   artifacts:
     reports:
       junit: tests-$PYTHON-$HG.xml

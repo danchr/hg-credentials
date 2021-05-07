@@ -40,6 +40,12 @@ from mercurial import registrar
 from mercurial import url
 from mercurial import util
 
+try:
+    from mercurial.utils import urlutil
+except ImportError:
+    from mercurial import util as urlutil
+
+
 testedwith = b"5.6 5.7 5.8"
 minimumhgversion = b"5.6"
 buglink = b"https://foss.heptapod.net/mercurial/hg-credentials/issues"
@@ -51,16 +57,6 @@ command = registrar.command(cmdtable)
 
 configtable = {}
 configitem = registrar.configitem(configtable)
-
-# pyobjc uses lazy modules internally, so suppress demandimport for
-# them, but don't import them yet, as that's relatively slow --
-# fortunately for us, accessing a repository over the network is even
-# slower, so no-one will notice the slowness of repeated imports
-demandimport.IGNORES |= {
-    "CoreFoundation",
-    "Foundation",
-    "Security",
-}
 
 configitem(
     b"credentials",
@@ -111,7 +107,7 @@ def get_auth_url(ui, uris, user=None, realm=None):
     else:
         uri = uris
 
-    urlobj = util.url(pycompat.bytesurl(uri))
+    urlobj = urlutil.url(pycompat.bytesurl(uri))
     urlobj.query = urlobj.fragment = None
 
     bestauth = httpconnection.readauthforuri(
